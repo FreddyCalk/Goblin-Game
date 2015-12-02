@@ -40,7 +40,7 @@ addEventListener('keyup', function (event){
 // Y lower out of bounds = 28;
 // Y upper out of bounds = 418;
 var checkCapture = function(){
-	var tolerance = 35;
+	var tolerance = 32;
 	var goblinXLow = goblin.x - tolerance;
 	var goblinXHigh = goblin.x + tolerance;
 	var goblinYLow = goblin.y - tolerance;
@@ -50,9 +50,11 @@ var checkCapture = function(){
 		score++;
 		goblin.x = Math.floor(Math.random()*390) + 60;
 		goblin.y = Math.floor(Math.random()*360) + 60;
-		fireDemon.x = Math.floor(Math.random()*390) + 60;
-		fireDemon.y = Math.floor(Math.random()*360) + 60;
-		
+		fireDemon1.x = Math.floor(Math.random()*390) + 60;
+		fireDemon1.y = Math.floor(Math.random()*360) + 60;
+		fireDemon2.x = Math.floor(Math.random()*390) + 60;
+		fireDemon2.y = Math.floor(Math.random()*360) + 60;
+
 
 	}
 	if(hero.x > 452){
@@ -67,22 +69,30 @@ var checkCapture = function(){
 	document.getElementById('score').innerHTML = "Score: "+(score-1);
 }
 var checkDeath = function(){
-	var tolerance = 30;
-	var fireDemonXLow = fireDemon.x - tolerance;
-	var fireDemonXHigh = fireDemon.x + tolerance;
-	var fireDemonYLow = fireDemon.y - tolerance;
-	var fireDemonYHigh = fireDemon.y + tolerance;
-	if((hero.x > fireDemonXLow)&&(hero.x < fireDemonXHigh)&&(hero.y > fireDemonYLow)&&(hero.y < fireDemonYHigh)){
+	var tolerance = 32;
+	var fireDemon1XLow = fireDemon1.x - tolerance;
+	var fireDemon1XHigh = fireDemon1.x + tolerance;
+	var fireDemon1YLow = fireDemon1.y - tolerance;
+	var fireDemon1YHigh = fireDemon1.y + tolerance;
+	var fireDemon2XLow = fireDemon2.x - tolerance;
+	var fireDemon2XHigh = fireDemon2.x + tolerance;
+	var fireDemon2YLow = fireDemon2.y - tolerance;
+	var fireDemon2YHigh = fireDemon2.y + tolerance;
+	if(((hero.x > fireDemon1XLow)&&(hero.x < fireDemon1XHigh)&&(hero.y > fireDemon1YLow)&&(hero.y < fireDemon1YHigh))||((hero.x > fireDemon2XLow)&&(hero.x < fireDemon2XHigh)&&(hero.y > fireDemon2YLow)&&(hero.y < fireDemon2YHigh))){
 		if(score > highScore){
 			highScore = score - 1;
 		}
+		alert('You Lose');
+		keysDown = {};
 		score = 1;
 		hero.x = 230;
 		hero.y = 240;
 		goblin.x = Math.floor(Math.random()*390) + 60;
 		goblin.y = Math.floor(Math.random()*360) + 60;
-		fireDemon.x = Math.floor(Math.random()*390) + 60;
-		fireDemon.y = Math.floor(Math.random()*360) + 60;
+		fireDemon1.x = Math.floor(Math.random()*390) + 60;
+		fireDemon1.y = Math.floor(Math.random()*360) + 60;
+		fireDemon2.x = Math.floor(Math.random()*390) + 60;
+		fireDemon2.y = Math.floor(Math.random()*360) + 60;
 		document.getElementById('score').innerHTML = "Score: "+(score-1);
 		document.getElementById('high-score').innerHTML = "High Score: "+highScore;
 	}
@@ -116,7 +126,8 @@ var render = function(){
 		context.drawImage(bgImage,0,0)
 		context.drawImage(chance,hero.x,hero.y)
 		context.drawImage(monster,goblin.x,goblin.y)
-		context.drawImage(badMonster,fireDemon.x,fireDemon.y)
+		context.drawImage(badMonster,fireDemon1.x,fireDemon1.y)
+		context.drawImage(badMonster,fireDemon2.x,fireDemon2.y)
 	}
 }
 
@@ -136,7 +147,7 @@ bgImage.src = "background.png";
 var chance = new Image();
 chance.src = "hero.png";
 var hero = {
-	speed: 500,
+	speed: 1000,
 	x: 230,
 	y: 240
 }
@@ -151,9 +162,12 @@ var goblin = {
 // Make our avoid monster
 var badMonster = new Image();
 badMonster.src = "Goblin_Rogue.png"
-var fireDemon = {
+var fireDemon1 = {
 	x: Math.floor(Math.random()*390)+60,
 	y: Math.floor(Math.random()*360)+60
 }
-
+var fireDemon2 = {
+	x: Math.floor(Math.random()*390)+60,
+	y: Math.floor(Math.random()*360)+60
+}
 
