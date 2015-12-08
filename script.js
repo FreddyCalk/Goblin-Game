@@ -53,7 +53,7 @@ monster.src = "monster.png"
 var goblin = {
 	x: Math.floor(Math.random()*390) + 60,
 	y: Math.floor(Math.random()*360) + 60,
-	speed: 1
+	speed: 3
 
 }
 // Make our avoid monster
