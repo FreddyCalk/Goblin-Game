@@ -126,6 +126,16 @@ var checkCapture = function(){
 			hero.y = 29;
 		}else if(hero.y < 28){
 			hero.y = 417;
+		}
+		if(goblin.x > 452){
+			goblin.x = 26;
+			console.log(hero.x)
+		}else if(goblin.x < 25){
+			goblin.x = 451;
+		}else if(goblin.y > 418){
+			goblin.y = 29;
+		}else if(goblin.y < 28){
+			goblin.y = 417;
 		}	
 		document.getElementById('score').innerHTML = "Score: "+(score-1);
 		document.getElementById('high-score').innerHTML = "High Score: "+highScore;
@@ -180,7 +190,7 @@ function turnGoblin(){
 		turn = 1;
 	}
 }
-setInterval(turnGoblin,1000)
+setInterval(turnGoblin,500)
 setInterval(checkCapture,1)
 var update = function(modifier){
 	if(38 in keysDown){
