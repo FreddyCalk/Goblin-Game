@@ -185,12 +185,9 @@ function goblinDirectionChange(){
 	return direction;
 }
 function turnGoblin(){
-	turn++;
-	if(turn>4){
-		turn = 1;
-	}
+	turn = Math.floor(Math.random()*4 +1);
 }
-setInterval(turnGoblin,500)
+setInterval(turnGoblin,200)
 setInterval(checkCapture,1)
 var update = function(modifier){
 	if(38 in keysDown){
