@@ -168,6 +168,22 @@ function moveGoblin(modifier){
 			break;
 		case 'down':
 			goblin.y += goblin.speed + modifier;
+			break;
+		case 'up-left':
+			goblin.y -= goblin.speed + modifier;
+			goblin.x -= goblin.speed + modifier;
+			break;
+		case 'up-right':
+			goblin.y -= goblin.speed + modifier;
+			goblin.x += goblin.speed + modifier;
+			break;
+		case 'down-left':
+			goblin.x -= goblin.speed + modifier;
+			goblin.y += goblin.speed + modifier;
+			break;
+		case 'down-right':
+			goblin.y += goblin.speed + modifier;
+			goblin.x += goblin.speed + modifier;
 	}
 }
 
@@ -181,13 +197,21 @@ function goblinDirectionChange(){
 		direction = 'down';
 	}else if(turn == 4){
 		direction = 'right';
+	}else if(turn == 5){
+		direction = 'up-left';
+	}else if(turn == 6){
+		direction = 'up-right';
+	}else if(turn == 7){
+		direction = 'down-left';
+	}else if(turn == 8){
+		direction = 'down-left';
 	}
 	return direction;
 }
 function turnGoblin(){
-	turn = Math.floor(Math.random()*4 +1);
+	turn = Math.floor(Math.random()*8 +1);
 }
-setInterval(turnGoblin,200)
+setInterval(turnGoblin,300)
 setInterval(checkCapture,1)
 var update = function(modifier){
 	if(38 in keysDown){
