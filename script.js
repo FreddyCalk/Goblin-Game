@@ -101,7 +101,6 @@ var checkCapture = function(){
 			fireDemon2YLow = fireDemon2.y - tolerance;
 			fireDemon2YHigh = fireDemon2.y + tolerance;
 			i++;
-			console.log(i);
 		}while(((hero.x > fireDemon1XLow)&&(hero.x < fireDemon1XHigh)&&(hero.y > fireDemon1YLow)&&(hero.y < fireDemon1YHigh))||((hero.x > fireDemon2XLow)&&(hero.x < fireDemon2XHigh)&&(hero.y > fireDemon2YLow)&&(hero.y < fireDemon2YHigh)))
 
 	}
@@ -119,7 +118,6 @@ var checkCapture = function(){
 		}
 		if(hero.x > 452){
 			hero.x = 26;
-			console.log(hero.x)
 		}else if(hero.x < 25){
 			hero.x = 451;
 		}else if(hero.y > 418){
@@ -129,7 +127,6 @@ var checkCapture = function(){
 		}
 		if(goblin.x > 452){
 			goblin.x = 26;
-			console.log(hero.x)
 		}else if(goblin.x < 25){
 			goblin.x = 451;
 		}else if(goblin.y > 418){
@@ -184,6 +181,7 @@ function moveGoblin(modifier){
 		case 'down-right':
 			goblin.y += goblin.speed + modifier;
 			goblin.x += goblin.speed + modifier;
+			break;
 	}
 }
 
@@ -204,12 +202,12 @@ function goblinDirectionChange(){
 	}else if(turn == 7){
 		direction = 'down-left';
 	}else if(turn == 8){
-		direction = 'down-left';
+		direction = 'down-right';
 	}
 	return direction;
 }
 function turnGoblin(){
-	turn = Math.floor(Math.random()*8 +1);
+	turn = Math.floor(Math.random()*8 + 1);
 }
 setInterval(turnGoblin,300)
 setInterval(checkCapture,1)
@@ -230,10 +228,6 @@ var update = function(modifier){
 
 }
 
-
-//  Draw our stuff!!
-	var then = Date.now();
-
 var render = function(){
 	if(bgReady){
 		context.drawImage(bgImage,0,0)
@@ -244,15 +238,13 @@ var render = function(){
 	}
 }
 
-var main = function(){
-	var now = Date.now();
-	var delta = now - then;
+function main(){
 	var mod = score/10;
 	update(mod)
 	moveGoblin(mod);
 	render();
 	requestAnimationFrame(main);
-}
+};
 
 main()
 
